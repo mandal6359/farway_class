@@ -8,14 +8,22 @@ def style_background_home():
     <style>
 
 
-             .stApp {
-             background: #5865F2 !important;
+            .stApp {
+                background: #5865F2 !important;
+            }
+
+
+            .stApp div[data-testid="stColumn"]{
+                background: #E0E3FF !important;
+                padding: 2.5rem !important;
+                border-radius: 1.5rem !important;
+                }
 
     </style>
 
 
 
-""",unsafe_allow_html=True)
+                  """,unsafe_allow_html=True)
 
 
 
@@ -60,15 +68,64 @@ def style_base_layout():
             font-size: 3.5rem !important;
             line-height: 1.1 !important;
             margin-bottom: 0rem !important;
+            
         }
 
-        # h2 {
-        #             font-family: 'Climate Crisis', sans-serif !important;
-        #             font-size: 3.5rem !important;
-        #             line-height: 1.1 !important;
-        #             margin-bottom: 0rem !important;
-        #         }
+        h2 {
+                    font-family: 'Climate Crisis', sans-serif !important;
+                    font-size: 2rem !important;
+                    line-height: 1.1 !important;
+                    margin-bottom: 0rem !important;
+                    
+        }
 
-    </style>
+        div[data-testid="stColumn"] h2 {
+            color: black !important;
 
-""",unsafe_allow_html=True)
+
+
+
+        h3, h4, p {
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        button[kind="primary"],
+        div[data-testid="stButton"] > button[data-testid="baseButton-primary"] {
+            border-radius: 1.5rem !important;
+            background: #5865F2 !important;
+            color: white !important;
+            padding; 10px 20px !important;
+            border: none !important;
+            transition: transform 0.25s ease-in-out !important;
+        }
+        
+        button[kind="secondary"] 
+        div[data-testid="stButton"] > button[data-testid="baseButton-secondary"] {
+            border-radius: 1.5rem !important;
+            background: #EB459E !important;
+            color: white !important;
+            padding; 10px 20px !important;
+            border: none !important;
+            transition: transform 0.25s ease-in-out !important;
+        }
+
+        button[kind="tertiary"] 
+        div[data-testid="stButton"] > button[data-testid="baseButton-tertiary"] {
+            border-radius: 1.5rem !important;
+            background: black !important;
+            color: white !important;
+            padding; 10px 20px !important;
+            border: none !important;
+            transition: transform 0.25s ease-in-out !important;
+        }
+
+        button:hover {
+            transform: scale(1.05) !important;
+        }
+
+
+        </style>
+
+""",unsafe_allow_html=True,
+    )
+
