@@ -5,6 +5,7 @@ from src.components.footer import footer_dashboard
 from src.database.db import check_teacher_exists, create_teacher, teacher_login, get_teacher_subjects
 from src.components.dialog_create_subject import create_subject_dialog
 from src.components.subject_card import subject_card
+from src.components.dialog_share_subject import share_subject_dialog
 
 def teacher_screen():
     style_background_dashboard()
@@ -80,16 +81,14 @@ def teacher_tab_manage_subjects():
     teacher_id = st.session_state.teacher_data['teacher_id']
     col1, col2 = st.columns(2)
     with col1:
-        st.header('Manage Subject', width='stretch')
+        st.header('Manage Subjects', width='stretch')
 
     with col2:
-        if st.header('Create new Subjects', width='stretch'):
+        if st.button('Create New Subject', width='stretch'):
             create_subject_dialog(teacher_id)
 
-    st.header('Manage Subjects')
 
-# LIST ALL SUBJECTSS ☠️☠️
-
+    # LIST all SUBJECTS
     subjects = get_teacher_subjects(teacher_id)
     if subjects:
         for sub in subjects:
