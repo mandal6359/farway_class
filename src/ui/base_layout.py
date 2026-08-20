@@ -14,9 +14,9 @@ def style_background_home():
 
 
             .stApp div[data-testid="stColumn"]{
-                background: #E0E3FF !important;
+                background-color: #E0E3FF !important;
                 padding: 2.5rem !important;
-                border-radius: 1.5rem !important;
+                border-radius: 5rem !important;
             }
 
     </style>
@@ -66,7 +66,6 @@ def style_base_layout():
                 font-size: 3.5rem !important;
                 line-height:1.1 !important;
                 margin-bottom: 0rem !important;
-                color: black !important;
             }
                 
 
@@ -77,13 +76,9 @@ def style_base_layout():
                 margin-bottom:0rem !important;
                 color: black !important;
             }
-            
-            # /* Target H2 inside Columns explicitly */
-            # div[data-testid="stColumn"] h2 {
-            #     color: black !important;
                 
             h3, h4, p {
-                font-family: 'Outfit', sans-serif !important;    
+                font-family: 'Outfit', sans-serif !important;
             }
                 
 

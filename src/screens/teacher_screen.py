@@ -33,59 +33,125 @@ def teacher_screen():
 
 def teacher_dashboard():
     teacher_data = st.session_state.teacher_data
-    c1, c2 = st.columns([1.5,1], vertical_alignment='center', gap='xlarge')
+
+    # ==============================
+    # TOP HEADER
+    # ==============================
+    c1, c2 = st.columns(
+        [1.5, 1],
+        vertical_alignment='center',
+        gap='xxlarge'
+    )
+
     with c1:
         header_dashboard()
+
     with c2:
-        if st.button("Logout", type='secondary', key='loginbackbtn', shortcut="control+backspace"):
-            st.session_state['login_type'] = False
+        st.markdown(
+        f"""
+        <h3 style="
+            color: #000000 !important;
+            font-family: 'Outfit', sans-serif !important;
+            margin: 0;
+        ">
+            Welcome, {teacher_data['name']}
+        </h3>
+        """,
+    unsafe_allow_html=True
+)
+        
+        if st.button(
+            "Logout",
+            type='secondary',
+            key='loginbackbtn',
+            shortcut="control+backspace"
+        ):
+            st.session_state['is_logged_in'] = False
             del st.session_state.teacher_data
             st.rerun()
-    st.subheader(f"""Welcome, {teacher_data['name']}""")
 
-
+    # ==============================
+    # SPACE AFTER HEADER
+    # ==============================
     st.space()
+
+    # ==============================
+    # TEACHER NAVIGATION
+    # ==============================
+    if "current_teacher_tab" not in st.session_state:
+        st.session_state.current_teacher_tab = 'take_attendance'
 
     tab1, tab2, tab3 = st.columns(3)
 
-    if"current_teacher_tab" not in st.session_state:
-        st.session_state.current_teacher_tab = 'take_attendance'
-
     with tab1:
-        type1 = "secondary" if st.session_state.current_teacher_tab == 'take_attendance' else "primary"
-        if st.button('Take Attendane', type= type1, width='stretch', icon=':material/ar_on_you:'):
+        type1 = (
+            "primary"
+            if st.session_state.current_teacher_tab == 'take_attendance'
+            else "tertiary"
+        )
+
+        if st.button(
+            'Take Attendance',
+            type=type1,
+            width='stretch',
+            icon=':material/ar_on_you:'
+        ):
             st.session_state.current_teacher_tab = 'take_attendance'
             st.rerun()
 
+    with tab2:
+        type2 = (
+            "primary"
+            if st.session_state.current_teacher_tab == 'manage_subjects'
+            else "tertiary"
+        )
 
-        with tab2:
-            type2 = "secondary" if st.session_state.current_teacher_tab == 'manage_subjects' else "primary"
-            if st.button('Manage Subjects', type= type2, width='stretch', icon=':material/book_ribbon:'):
-                st.session_state.current_teacher_tab = 'manage_subjects'
-                st.rerun()
+        if st.button(
+            'Manage Subjects',
+            type=type2,
+            width='stretch',
+            icon=':material/book_ribbon:'
+        ):
+            st.session_state.current_teacher_tab = 'manage_subjects'
+            st.rerun()
 
+    with tab3:
+        type3 = (
+            "primary"
+            if st.session_state.current_teacher_tab == 'attendance_records'
+            else "tertiary"
+        )
 
-        with tab3:
-            type3 = "secondary" if st.session_state.current_teacher_tab == 'attendance_records' else "primary"
-            if st.button('Attendane Records', type= type3, width='stretch', icon=':material/cards_stack:'):
-                st.session_state.current_teacher_tab = 'attendance_records'
-                st.rerun()
+        if st.button(
+            'Attendance Records',
+            type=type3,
+            width='stretch',
+            icon=':material/cards_stack:'
+        ):
+            st.session_state.current_teacher_tab = 'attendance_records'
+            st.rerun()
 
-        st.divider()
+    # ==============================
+    # CONTENT AREA
+    # ==============================
+    st.divider()
 
-        if st.session_state.current_teacher_tab == 'take_attendance':
-            teacher_tab_take_attendance()
+    if st.session_state.current_teacher_tab == 'take_attendance':
+        teacher_tab_take_attendance()
 
-        if st.session_state.current_teacher_tab == 'manage_subjects':
-            teacher_tab_manage_subjects()
+    elif st.session_state.current_teacher_tab == 'manage_subjects':
+        teacher_tab_manage_subjects()
 
-        if st.session_state.current_teacher_tab == 'attendance_records':
-            teacher_tab_attendance_records()
+    elif st.session_state.current_teacher_tab == 'attendance_records':
+        teacher_tab_attendance_records()
 
-
+    # ==============================
+    # FOOTER
+    # ==============================
     footer_dashboard()
 
 def teacher_tab_take_attendance():
+
     teacher_id = st.session_state.teacher_data['teacher_id']
     st.header('Take AI Attendance')
 
@@ -183,6 +249,9 @@ def teacher_tab_take_attendance():
     with c3:
         if st.button('Use Voice Attendance', type='primary', width='stretch', icon=':material/mic:'):
             voice_attendance_dialog(selected_subject_id)
+
+
+
 
 
 def teacher_tab_manage_subjects():
@@ -284,7 +353,7 @@ def login_teacher(username, password):
     return False
 
 def teacher_screen_login():
-    c1, c2 = st.columns(2, vertical_alignment='center', gap='xlarge')
+    c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
         header_dashboard()
     with c2:
@@ -337,11 +406,11 @@ def  register_teacher(teacher_name, teacher_username, teacher_pass, teacher_pass
 
 
 def teacher_screen_register():
-    c1, c2 = st.columns(2, vertical_alignment='center', gap='xlarge')
+    c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
         header_dashboard()
     with c2:
-        if st.button("Go Back to Home", type='primary', key='loginbackbtn', shortcut='control+backspace'):
+        if st.button("Go Back to Home", type='secondary', key='loginbackbtn', shortcut='control+backspace'):
             st.session_state['login_type'] = None
             st.rerun()
 
